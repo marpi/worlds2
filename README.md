@@ -1,6 +1,6 @@
 # [Building Virtual Reality Worlds using Three.js](http://grayarea.org/workshop/building-virtual-reality-worlds-using-threejs/)
 
-[![alt text](http://worlds.marpi.pl/assets/image.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds.marpi.pl/)
+[![alt text](http://worlds2.marpi.pl/assets/image.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/)
 
 ### How to run
 
@@ -23,8 +23,8 @@ python -m http.server
 
 And once you commit your changes, and want to see them in Google Cardboard:
 
-[https://worlds.marpi.pl/](https://worlds.marpi.pl/)
+[https://worlds2.marpi.pl/](https://worlds2.marpi.pl/)
 
-### And here's what we made
+### And all personal projects
 
 [https://worlds.marpi.pl/public/](https://worlds.marpi.pl/public/)
