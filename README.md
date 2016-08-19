@@ -1,4 +1,4 @@
-# [Building Virtual Reality Worlds using Three.js](http://grayarea.org/workshop/building-virtual-reality-worlds-using-threejs/)
+# [Building Virtual Reality Worlds using Three.js](http://grayarea.org/workshop/building-virtual-reality-worlds-using-three-js/)
 
 [![alt text](http://worlds2.marpi.pl/assets/image.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/)
 
