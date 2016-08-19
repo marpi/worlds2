@@ -25,6 +25,6 @@ And once you commit your changes, and want to see them in Google Cardboard:
 
 [https://worlds2.marpi.pl/](https://worlds2.marpi.pl/)
 
-### And all personal projects
+### Project folders
 
 [https://worlds.marpi.pl/public/](https://worlds.marpi.pl/public/)
