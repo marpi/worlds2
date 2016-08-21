@@ -81,7 +81,7 @@
             function setup() {
                 // beginning of cubemap
                 
-                var cubeMap=getCubeMap(0)
+                /*var cubeMap=getCubeMap(0)
                 
                 var cubeShader = THREE.ShaderLib['cube'];
                 cubeShader.uniforms['tCube'].value = cubeMap
@@ -96,24 +96,25 @@
 
                 var skyBox = new THREE.Mesh(new THREE.CubeGeometry(100, 100, 100), skyBoxMaterial);
 
-                scene.add(skyBox);
+                scene.add(skyBox);*/
                 
                 //the end
 
-                var texture = new THREE.TextureLoader().load("assets/textures/world.jpg");
+                var texture = new THREE.TextureLoader().load("assets/textures/workshop.jpg");
                 texture.wrapS = THREE.RepeatWrapping;
                 texture.wrapT = THREE.RepeatWrapping;
                 texture.repeat.set(1, 1);
 
                 // central object
 
-                var geometry = new THREE.TorusKnotGeometry(1.14, 0.55, 35, 16);
-                var material = new THREE.MeshStandardMaterial({
+                var geometry = new THREE.SphereGeometry(20,17,17)//new THREE.TorusKnotGeometry(1.14, 0.55, 35, 16);
+                var material = new THREE.MeshBasicMaterial({
                     //color: 0,
-                    //map: texture,
+                    map: texture,
                     roughness:0,
                     metalness:1,
-                    envMap:cubeMap,
+                    side:THREE.DoubleSide,
+                    //envMap:cubeMap,
                     shading: THREE.FlatShading
                 });
                 var object = new THREE.Mesh(geometry, material);
@@ -149,8 +150,8 @@
                 light.position.set(-1, 1.5, 0.5);
                 scene.add(light);
 
-                //var ambient = new THREE.AmbientLight(0xaaaaaa)
-                //scene.add(ambient)
+                var ambient = new THREE.AmbientLight(0xaaaaaa)
+                scene.add(ambient)
             }
 
             function render() {
