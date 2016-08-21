@@ -31,8 +31,9 @@
         <script src="js/utils/helpers.js"></script>
 
         <script>
-            var camera, scene, renderer,group;
+            var camera, scene, renderer, group;
             var mobile = false;
+            var mouseEvent = {screenX: 0, screenY: 0};
 
             init();
             setup();
@@ -76,6 +77,13 @@
                 window.addEventListener('deviceorientation', setOrientationControls, true);
                 window.addEventListener('resize', onWindowResize, false);
 
+                window.addEventListener('mousemove', onMouseMove, false);
+
+            }
+
+            function onMouseMove(e) {
+                mouseEvent = e;
+                console.log(mouseEvent.screenX / window.innerWidth)
             }
 
             function setup() {
@@ -123,7 +131,7 @@
                 // cubes
 
                 var geo = new THREE.BoxGeometry(.1, .1, .1, 1, 1, 1)
-                            group = new THREE.Object3D();
+                group = new THREE.Object3D();
                 for (var _x = -13; _x <= 13; _x++) {
                     for (var _y = -0; _y <= 0; _y++) {
                         for (var _z = -13; _z <= 13; _z++) {
@@ -165,19 +173,19 @@
                 var ambient = new THREE.AmbientLight(0xaaaaaa)
                 scene.add(ambient)
             }
-            var time=0;
+            var time = 0;
             function render() {
-                time+=0.1
+                time += 0.1
                 requestAnimationFrame(render);
 
-                var i=0
+                var i = 0
                 for (var _x = -13; _x <= 13; _x++) {
                     for (var _y = -0; _y <= 0; _y++) {
                         for (var _z = -13; _z <= 13; _z++) {
                             var mesh = group.children[i]
 
                             mesh.scale.x = 10;
-                            mesh.scale.y = 50 * (1 + Math.sin(time+_x / 2) * Math.sin(time+_z / 2)) / 2;
+                            mesh.scale.y = 50 * (1 + Math.sin(-6 * (mouseEvent.screenX / window.innerWidth) + _x / 2) * Math.sin(-6 * (mouseEvent.screenY / window.innerHeight) + _z / 2)) / 2;
                             mesh.scale.z = 10;
 
                             i++
