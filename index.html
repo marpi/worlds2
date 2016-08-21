@@ -63,6 +63,7 @@
                 controls = new THREE.OrbitControls(camera);
                 controls.autoRotate = true;
                 controls.autoRotateSpeed = -1
+                controls.maxPolarAngle=Math.PI/2
 
                 if (WEBVR.isAvailable() === true) {
                     controls = new THREE.VRControls(camera);
@@ -108,21 +109,23 @@
 
                 //the end
 
-                var texture = new THREE.TextureLoader().load("assets/textures/workshop_small.jpg");
+                var texture = new THREE.TextureLoader().load("assets/textures/metal_tiles.png");
                 texture.wrapS = THREE.RepeatWrapping;
                 texture.wrapT = THREE.RepeatWrapping;
-                texture.repeat.set(1, 1);
+                texture.repeat.set(30, 30);
 
                 // central object
 
                 var geometry = new THREE.TorusKnotGeometry(1.14, 0.55, 35, 10);
                 var material = new THREE.MeshStandardMaterial({
                     //color: 0,
-                    //map: texture,
+                    map: texture,
                     roughness: .3,
-                    metalness: 1,
+                    metalness: 0,
+                    lightMap: texture,
                     side: THREE.DoubleSide,
                     envMap: cubeMap,
+                    
                     shading: THREE.FlatShading
                 });
                 var object = new THREE.Mesh(geometry, material);
