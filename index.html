@@ -127,10 +127,30 @@
                 });
                 var object = new THREE.Mesh(geometry, material);
                 //scene.add(object);
+                
+                var loader = new THREE.JSONLoader();
+
+                loader.load(
+                        'assets/stadium/stadium.json',
+                        function (geometry) {
+
+                            var faceMaterial = new THREE.MultiMaterial([material]);
+
+                            var object = new THREE.Mesh(geometry, faceMaterial)
+                            console.log(loader);
+
+                            object.scale.set(.02, .02, .02);
+                            //object.position.set(0, .45, 0);
+                            /*if (WEBVR.isAvailable() === true) {
+                                object.position.set(0, 2, -1);
+                            }*/
+                            scene.add(object);
+                        }
+                );
 
                 // cubes
 
-                var geo = new THREE.BoxGeometry(.1, .1, .1, 1, 1, 1)
+                /*var geo = new THREE.BoxGeometry(.1, .1, .1, 1, 1, 1)
                 group = new THREE.Object3D();
                 for (var _x = -13; _x <= 13; _x++) {
                     for (var _y = -0; _y <= 0; _y++) {
@@ -152,7 +172,7 @@
                             group.add(mesh);
                         }
                     }
-                }
+                }*/
 
                 // merge
 
@@ -162,7 +182,7 @@
                  geom.merge(group.children[i].geometry, group.children[i].matrix);
                  }
                  group = new THREE.Mesh(geom, material);*/
-                scene.add(group)
+                //scene.add(group)
 
                 // light
 
@@ -178,7 +198,7 @@
                 time += 0.1
                 requestAnimationFrame(render);
 
-                var i = 0
+                /*var i = 0
                 for (var _x = -13; _x <= 13; _x++) {
                     for (var _y = -0; _y <= 0; _y++) {
                         for (var _z = -13; _z <= 13; _z++) {
@@ -191,7 +211,7 @@
                             i++
                         }
                     }
-                }
+                }*/
 
                 controls.update();
 
