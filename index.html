@@ -81,7 +81,7 @@
             function setup() {
                 // beginning of cubemap
                 
-                /*var cubeMap=getCubeMap(0)
+                var cubeMap=getCubeMap(1)
                 
                 var cubeShader = THREE.ShaderLib['cube'];
                 cubeShader.uniforms['tCube'].value = cubeMap
@@ -96,7 +96,7 @@
 
                 var skyBox = new THREE.Mesh(new THREE.CubeGeometry(100, 100, 100), skyBoxMaterial);
 
-                scene.add(skyBox);*/
+                scene.add(skyBox);
                 
                 //the end
 
@@ -107,14 +107,14 @@
 
                 // central object
 
-                var geometry = new THREE.SphereGeometry(20,17,17)//new THREE.TorusKnotGeometry(1.14, 0.55, 35, 16);
-                var material = new THREE.MeshBasicMaterial({
+                var geometry = new THREE.TorusKnotGeometry(1.14, 0.55, 35, 10);
+                var material = new THREE.MeshStandardMaterial({
                     //color: 0,
-                    map: texture,
+                    //map: texture,
                     roughness:0,
                     metalness:1,
                     side:THREE.DoubleSide,
-                    //envMap:cubeMap,
+                    envMap:cubeMap,
                     shading: THREE.FlatShading
                 });
                 var object = new THREE.Mesh(geometry, material);
@@ -122,7 +122,7 @@
 
                 // cubes
 
-                /*var group = new THREE.Object3D();
+                var group = new THREE.Object3D();
                  for (var _x = -3; _x <= 3; _x++) {
                  for (var _y = -3; _y <= 3; _y++) {
                  for (var _z = -3; _z <= 3; _z++) {
@@ -142,7 +142,7 @@
                  geom.merge(group.children[i].geometry, group.children[i].matrix);
                  }
                  group = new THREE.Mesh(geom, material);
-                 //scene.add(group)*/
+                 scene.add(group)
 
                 // light
 

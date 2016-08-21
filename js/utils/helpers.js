@@ -48,6 +48,7 @@ function getCubeMap(i) {
 
     var envMaps = [
         {file: "sunset.jpg", size: 512},
+        {file: "workshop_cube.jpg", size: 1024},
         {file: "Above_The_Sea.jpg", size: 1024},
         {file: "bluecloud.jpg", size: 1024},
         {file: "fog.jpg", size: 512},
