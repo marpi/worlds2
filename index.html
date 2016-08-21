@@ -119,13 +119,25 @@
                 var geometry = new THREE.TorusKnotGeometry(1.14, 0.55, 35, 10);
                 var material = new THREE.MeshStandardMaterial({
                     //color: 0,
-                    map: texture,
-                    roughness: .3,
-                    metalness: 0,
+                    //map: texture,
+                    roughness: 0,
+                    metalness: 1,
+                    lightMap: texture,
+                    side: THREE.DoubleSide,
+                    envMap: getCubeMap(1),
+                    
+                    shading: THREE.SmoothShading
+                });
+                var material2 = new THREE.MeshStandardMaterial({
+                    //color: 0,
+                    //map: texture,
+                    roughness: 0,
+                    metalness: 1,
                     lightMap: texture,
                     side: THREE.DoubleSide,
                     envMap: cubeMap,
-                    
+                    transparent:true,
+                    opacity:.5,
                     shading: THREE.FlatShading
                 });
                 var object = new THREE.Mesh(geometry, material);
@@ -134,10 +146,10 @@
                 var loader = new THREE.JSONLoader();
 
                 loader.load(
-                        'assets/stadium/stadium.json',
+                        'assets/car/car.json',
                         function (geometry) {
 
-                            var faceMaterial = new THREE.MultiMaterial([material]);
+                            var faceMaterial = new THREE.MultiMaterial([material,material2]);
 
                             var object = new THREE.Mesh(geometry, faceMaterial)
                             console.log(loader);
