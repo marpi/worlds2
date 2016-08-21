@@ -83,7 +83,7 @@
 
             function onMouseMove(e) {
                 mouseEvent = e;
-                console.log(mouseEvent.screenX / window.innerWidth)
+                //console.log(mouseEvent.screenX / window.innerWidth)
             }
 
             function setup() {
@@ -126,7 +126,7 @@
                     shading: THREE.FlatShading
                 });
                 var object = new THREE.Mesh(geometry, material);
-                scene.add(object);
+                //scene.add(object);
 
                 // cubes
 
@@ -137,16 +137,16 @@
                         for (var _z = -13; _z <= 13; _z++) {
                             var mesh = new THREE.Mesh(geo, material)
 
-                            mesh.scale.x = 10;
-                            mesh.scale.y = 50 * (1 + Math.sin(_x / 2) * Math.sin(_z / 2)) / 2;
-                            mesh.scale.z = 10;
+                            mesh.scale.x = 1;
+                            mesh.scale.y = 5 * (1 + Math.sin(_x / 2) * Math.sin(_z / 2)) / 2;
+                            mesh.scale.z = 1;
 
                             mesh.rotation.x = 0//Math.random();
                             mesh.rotation.y = 0;
                             mesh.rotation.z = 0;
 
                             mesh.position.x = _x
-                            mesh.position.y = _y
+                            mesh.position.y = _y-2
                             mesh.position.z = _z
 
                             group.add(mesh);
@@ -185,7 +185,7 @@
                             var mesh = group.children[i]
 
                             mesh.scale.x = 10;
-                            mesh.scale.y = 50 * (1 + Math.sin(-6 * (mouseEvent.screenX / window.innerWidth) + _x / 2) * Math.sin(-6 * (mouseEvent.screenY / window.innerHeight) + _z / 2)) / 2;
+                            mesh.scale.y = 50 * (1 + Math.sin(-6 * (time/10+mouseEvent.screenX / window.innerWidth) + _x / 2) * Math.sin(-6 * (mouseEvent.screenY / window.innerHeight) + _z / 2)) / 2;
                             mesh.scale.z = 10;
 
                             i++
