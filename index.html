@@ -35,6 +35,7 @@
             var mobile = false;
             var mouseEvent = {screenX: 0, screenY: 0};
             var raycaster = new THREE.Raycaster();
+            var target = new THREE.Object3D();
 
             init();
             setup();
@@ -62,9 +63,9 @@
                 // controls
 
                 controls = new THREE.OrbitControls(camera);
-                controls.autoRotate = true;
-                controls.autoRotateSpeed = -1
-                controls.maxPolarAngle = Math.PI / 2
+                 controls.autoRotate = true;
+                 controls.autoRotateSpeed = -1
+                 controls.maxPolarAngle = Math.PI / 2
 
                 if (WEBVR.isAvailable() === true) {
                     controls = new THREE.VRControls(camera);
@@ -98,8 +99,8 @@
 
                     //intersects[ 0 ].object.material.color.setHex(Math.random() * 0xffffff);
                     //intersects[ 0 ].object.scale.y = 100
-                    TweenMax.to(intersects[ 0 ].object.scale, .1, {y: 100})
-                    TweenMax.to(intersects[ 0 ].object.scale, 1, {y: 10, delay: .1,ease:Back.easeOut})
+                    TweenMax.to(intersects[ 0 ].object.position, .1, {y: 10})
+                    TweenMax.to(intersects[ 0 ].object.position, 1, {y: -2, delay: .1, ease: Back.easeOut})
                 }
             }
 
@@ -169,6 +170,8 @@
                             mesh.position.y = _y - 2
                             mesh.position.z = _z
 
+                            mesh.lookAt(scene.position)
+
                             group.add(mesh);
                         }
                     }
@@ -192,28 +195,52 @@
 
                 var ambient = new THREE.AmbientLight(0xaaaaaa)
                 scene.add(ambient)
+
+                jumpCam()
             }
+
+            function jumpCam() {
+                /*TweenMax.to(camera.position, 1, {
+                    x: (Math.random() - .5) * 10,
+                    y: (Math.random()) * 5,
+                    z: (Math.random() - .5) * 10,
+                    onComplete: jumpCam
+                });*/
+
+                TweenMax.to(target.position, 1, {
+                    x: (Math.random() - .5) * 10,
+                    y: (Math.random()) * 5,
+                    z: (Math.random() - .5) * 10,
+                    onComplete: jumpCam
+                });
+            }
+
             var time = 0;
             function render() {
                 time += 0.1
                 requestAnimationFrame(render);
 
-                /*var i = 0
-                 for (var _x = -13; _x <= 13; _x++) {
-                 for (var _y = -0; _y <= 0; _y++) {
-                 for (var _z = -13; _z <= 13; _z++) {
-                 var mesh = group.children[i]
-                 
-                 mesh.scale.x = 10;
-                 mesh.scale.y = 50 * (1 + Math.sin(-6 * (time / 10 + mouseEvent.screenX / window.innerWidth) + _x / 2) * Math.sin(-6 * (mouseEvent.screenY / window.innerHeight) + _z / 2)) / 2;
-                 mesh.scale.z = 10;
-                 
-                 i++
-                 }
-                 }
-                 }*/
+                var i = 0
+                for (var _x = -13; _x <= 13; _x++) {
+                    for (var _y = -0; _y <= 0; _y++) {
+                        for (var _z = -13; _z <= 13; _z++) {
+                            var mesh = group.children[i]
 
-                controls.update();
+                            mesh.scale.x = 10;
+                            mesh.scale.y = 50 * (1 + Math.sin(-6 * (time / 10) + _x / 2) * Math.sin(0 + _z / 2)) / 2;
+                            //mesh.scale.z = 10;
+
+                            mesh.lookAt(target.position)
+
+                            i++
+                        }
+                    }
+                }
+
+                //controls.update();
+
+
+                camera.lookAt(scene.position)
 
                 if (mobile) {
                     camera.position.set(0, 0, 0)
