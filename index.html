@@ -34,6 +34,7 @@
             var camera, scene, renderer, group;
             var mobile = false;
             var mouseEvent = {screenX: 0, screenY: 0};
+            var raycaster = new THREE.Raycaster();
 
             init();
             setup();
@@ -63,7 +64,7 @@
                 controls = new THREE.OrbitControls(camera);
                 controls.autoRotate = true;
                 controls.autoRotateSpeed = -1
-                controls.maxPolarAngle=Math.PI/2
+                controls.maxPolarAngle = Math.PI / 2
 
                 if (WEBVR.isAvailable() === true) {
                     controls = new THREE.VRControls(camera);
@@ -82,15 +83,30 @@
 
             }
 
-            function onMouseMove(e) {
-                mouseEvent = e;
+            function onMouseMove(event) {
+                mouseEvent = event;
                 //console.log(mouseEvent.screenX / window.innerWidth)
+                var mouse = {x: 0, y: 0}
+                mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+                mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+
+                raycaster.setFromCamera(mouse, camera);
+
+                var intersects = raycaster.intersectObjects(group.children);
+
+                if (intersects.length > 0) {
+
+                    //intersects[ 0 ].object.material.color.setHex(Math.random() * 0xffffff);
+                    //intersects[ 0 ].object.scale.y = 100
+                    TweenMax.to(intersects[ 0 ].object.scale, .1, {y: 100})
+                    TweenMax.to(intersects[ 0 ].object.scale, 1, {y: 10, delay: .1,ease:Back.easeOut})
+                }
             }
 
             function setup() {
                 // beginning of cubemap
 
-                var cubeMap = getCubeMap(9)
+                var cubeMap = getCubeMap(2)
 
                 var cubeShader = THREE.ShaderLib['cube'];
                 cubeShader.uniforms['tCube'].value = cubeMap
@@ -124,70 +140,39 @@
                     metalness: 1,
                     lightMap: texture,
                     side: THREE.DoubleSide,
-                    envMap: getCubeMap(1),
-                    
-                    shading: THREE.SmoothShading
-                });
-                var material2 = new THREE.MeshStandardMaterial({
-                    //color: 0,
-                    //map: texture,
-                    roughness: 0,
-                    metalness: 1,
-                    lightMap: texture,
-                    side: THREE.DoubleSide,
                     envMap: cubeMap,
-                    transparent:true,
-                    opacity:.5,
-                    shading: THREE.FlatShading
+                    shading: THREE.SmoothShading
                 });
                 var object = new THREE.Mesh(geometry, material);
                 //scene.add(object);
-                
-                var loader = new THREE.JSONLoader();
 
-                loader.load(
-                        'assets/car/car.json',
-                        function (geometry) {
 
-                            var faceMaterial = new THREE.MultiMaterial([material,material2]);
-
-                            var object = new THREE.Mesh(geometry, faceMaterial)
-                            console.log(loader);
-
-                            object.scale.set(.02, .02, .02);
-                            //object.position.set(0, .45, 0);
-                            /*if (WEBVR.isAvailable() === true) {
-                                object.position.set(0, 2, -1);
-                            }*/
-                            scene.add(object);
-                        }
-                );
 
                 // cubes
 
-                /*var geo = new THREE.BoxGeometry(.1, .1, .1, 1, 1, 1)
+                var geo = new THREE.BoxGeometry(.1, .1, .1, 1, 1, 1)
                 group = new THREE.Object3D();
                 for (var _x = -13; _x <= 13; _x++) {
                     for (var _y = -0; _y <= 0; _y++) {
                         for (var _z = -13; _z <= 13; _z++) {
                             var mesh = new THREE.Mesh(geo, material)
 
-                            mesh.scale.x = 1;
-                            mesh.scale.y = 5 * (1 + Math.sin(_x / 2) * Math.sin(_z / 2)) / 2;
-                            mesh.scale.z = 1;
+                            mesh.scale.x = 10
+                            mesh.scale.y = 10
+                            mesh.scale.z = 10
 
                             mesh.rotation.x = 0//Math.random();
                             mesh.rotation.y = 0;
                             mesh.rotation.z = 0;
 
                             mesh.position.x = _x
-                            mesh.position.y = _y-2
+                            mesh.position.y = _y - 2
                             mesh.position.z = _z
 
                             group.add(mesh);
                         }
                     }
-                }*/
+                }
 
                 // merge
 
@@ -197,7 +182,7 @@
                  geom.merge(group.children[i].geometry, group.children[i].matrix);
                  }
                  group = new THREE.Mesh(geom, material);*/
-                //scene.add(group)
+                scene.add(group)
 
                 // light
 
@@ -214,19 +199,19 @@
                 requestAnimationFrame(render);
 
                 /*var i = 0
-                for (var _x = -13; _x <= 13; _x++) {
-                    for (var _y = -0; _y <= 0; _y++) {
-                        for (var _z = -13; _z <= 13; _z++) {
-                            var mesh = group.children[i]
-
-                            mesh.scale.x = 10;
-                            mesh.scale.y = 50 * (1 + Math.sin(-6 * (time/10+mouseEvent.screenX / window.innerWidth) + _x / 2) * Math.sin(-6 * (mouseEvent.screenY / window.innerHeight) + _z / 2)) / 2;
-                            mesh.scale.z = 10;
-
-                            i++
-                        }
-                    }
-                }*/
+                 for (var _x = -13; _x <= 13; _x++) {
+                 for (var _y = -0; _y <= 0; _y++) {
+                 for (var _z = -13; _z <= 13; _z++) {
+                 var mesh = group.children[i]
+                 
+                 mesh.scale.x = 10;
+                 mesh.scale.y = 50 * (1 + Math.sin(-6 * (time / 10 + mouseEvent.screenX / window.innerWidth) + _x / 2) * Math.sin(-6 * (mouseEvent.screenY / window.innerHeight) + _z / 2)) / 2;
+                 mesh.scale.z = 10;
+                 
+                 i++
+                 }
+                 }
+                 }*/
 
                 controls.update();
 
