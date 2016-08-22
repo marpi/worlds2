@@ -11,7 +11,11 @@
             body {
                 margin: 0px;
                 overflow: hidden;
+<<<<<<< HEAD
                 background-color: #000000;
+=======
+                background-color: #ff6666;
+>>>>>>> 0606b722e7383b7a0cb427c4a50c1c908de80189
             }
         </style>
     </head>
@@ -25,6 +29,7 @@
         <script src="js/third-party/threejs/controls/VRControls.js"></script>
         <script src="js/third-party/threejs/controls/DeviceOrientationControls.js"></script>
         <script src="js/third-party/threejs/controls/OrbitControls.js"></script>
+<<<<<<< HEAD
 
         <script src="js/third-party/TweenMax.min.js"></script>
 
@@ -38,6 +43,16 @@
             var target = new THREE.Object3D();
             var orgGeometry, object
             var pointLight
+=======
+        
+        <script src="js/third-party/TweenMax.min.js"></script>
+        
+        <script src="js/utils/helpers.js"></script>
+
+        <script>
+            var camera, scene, renderer;
+            var mobile = false;
+>>>>>>> 0606b722e7383b7a0cb427c4a50c1c908de80189
 
             init();
             setup();
@@ -59,15 +74,22 @@
                 // camera
 
                 camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
+<<<<<<< HEAD
                 camera.position.set(0, 4, 10);
+=======
+                camera.position.set(0, 0, 3);
+>>>>>>> 0606b722e7383b7a0cb427c4a50c1c908de80189
                 camera.focalLength = camera.position.distanceTo(scene.position);
 
                 // controls
 
                 controls = new THREE.OrbitControls(camera);
                 controls.autoRotate = true;
+<<<<<<< HEAD
                 controls.autoRotateSpeed = -1
                 controls.maxPolarAngle = Math.PI / 2
+=======
+>>>>>>> 0606b722e7383b7a0cb427c4a50c1c908de80189
 
                 if (WEBVR.isAvailable() === true) {
                     controls = new THREE.VRControls(camera);
@@ -82,6 +104,7 @@
                 window.addEventListener('deviceorientation', setOrientationControls, true);
                 window.addEventListener('resize', onWindowResize, false);
 
+<<<<<<< HEAD
                 window.addEventListener('mousemove', onMouseMove, false);
 
             }
@@ -190,11 +213,65 @@
                  }
                  group = new THREE.Mesh(geom, material);*/
                 scene.add(group)
+=======
+            }
+
+            function setup() {
+                
+                // central object
+
+                //var geometry = new THREE.TorusKnotGeometry(0.64, 0.25, 25, 6);
+                //var material = new THREE.MeshPhongMaterial({shading: THREE.FlatShading});
+                //var object = new THREE.Mesh(geometry, material);
+                //scene.add(object);
+
+                var geometry = new THREE.SphereGeometry(.5, 25, 25);
+                var material = new THREE.MeshBasicMaterial( { color: 0x00ffff, wireframe: true } );
+                var object = new THREE.Mesh(geometry, material);
+                object.translateZ(.5);
+                scene.add(object);
+
+                geometry = new THREE.SphereGeometry(.75, 25, 25);
+                material = new THREE.MeshBasicMaterial( { color: 0x00ffaf, wireframe: true } );
+                object = new THREE.Mesh(geometry, material);
+                object.translateZ(1);
+                scene.add(object);
+
+                geometry = new THREE.SphereGeometry(1.0, 25, 25);
+                material = new THREE.MeshBasicMaterial( { color: 0xf0ffaf, wireframe: true } );
+                object = new THREE.Mesh(geometry, material);
+                object.translateZ(2);
+                scene.add(object);
+                // cubes
+
+                //var group = new THREE.Object3D();
+                //for (var _x = -3; _x <= 3; _x++) {
+                //    for (var _y = -3; _y <= 3; _y++) {
+                //        for (var _z = -3; _z <= 3; _z++) {
+                //            var geo = new THREE.BoxGeometry(.1, .1, .1, 1, 1, 1)
+                //            var mesh = new THREE.Mesh(geo, material)
+                //            mesh.position.set(_x, _y, _z)
+                //            group.add(mesh);
+                //        }
+                //    }
+                //}
+
+                // merge
+
+                //var geom = new THREE.Geometry()
+                //for (var i = 0; i < group.children.length; i++) {
+                //     group.children[i].updateMatrix();
+                //     geom.merge(group.children[i].geometry, group.children[i].matrix);
+                // }
+                // group = new THREE.Mesh(geom, material);
+                // scene.add(group)
+>>>>>>> 0606b722e7383b7a0cb427c4a50c1c908de80189
 
                 // light
 
                 var light = new THREE.DirectionalLight(0xffffff);
                 light.position.set(-1, 1.5, 0.5);
+<<<<<<< HEAD
                 //scene.add(light);
                 
                 pointLight = new THREE.PointLight()
@@ -270,6 +347,17 @@
 
                 //camera.lookAt(scene.position)
 
+=======
+                scene.add(light);
+
+            }
+
+            function render() {
+                requestAnimationFrame(render);
+
+                controls.update();
+
+>>>>>>> 0606b722e7383b7a0cb427c4a50c1c908de80189
                 if (mobile) {
                     camera.position.set(0, 0, 0)
                     camera.translateZ(5);
