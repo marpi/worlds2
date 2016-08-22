@@ -2,6 +2,14 @@
 
 [![alt text](http://worlds2.marpi.pl/assets/image.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/)
 
+[![alt text](http://worlds2.marpi.pl/assets/stadium.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/public/stadium)
+
+[![alt text](http://worlds2.marpi.pl/assets/wave.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/public/wave)
+
+[![alt text](http://worlds2.marpi.pl/assets/glass_eagle.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/public/glass_eagle)
+
+[![alt text](http://worlds2.marpi.pl/assets/class.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/public/class)
+
 ### How to run
 
 In order to run the project you need a local server. You can use MAMP:
@@ -24,7 +32,3 @@ python -m http.server
 And once you commit your changes, and want to see them in Google Cardboard:
 
 [https://worlds2.marpi.pl/](https://worlds2.marpi.pl/)
-
-### Project folders
-
-[https://worlds2.marpi.pl/public/](https://worlds2.marpi.pl/public/)
