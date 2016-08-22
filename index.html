@@ -36,6 +36,8 @@
             var mouseEvent = {screenX: 0, screenY: 0};
             var raycaster = new THREE.Raycaster();
             var target = new THREE.Object3D();
+            var orgGeometry, object
+            var pointLight
 
             init();
             setup();
@@ -57,15 +59,15 @@
                 // camera
 
                 camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.set(0, 10, 20);
+                camera.position.set(0, 4, 10);
                 camera.focalLength = camera.position.distanceTo(scene.position);
 
                 // controls
 
                 controls = new THREE.OrbitControls(camera);
-                 controls.autoRotate = true;
-                 controls.autoRotateSpeed = -1
-                 controls.maxPolarAngle = Math.PI / 2
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = -1
+                controls.maxPolarAngle = Math.PI / 2
 
                 if (WEBVR.isAvailable() === true) {
                     controls = new THREE.VRControls(camera);
@@ -107,7 +109,7 @@
             function setup() {
                 // beginning of cubemap
 
-                var cubeMap = getCubeMap(2)
+                var cubeMap = null//getCubeMap(2)
 
                 var cubeShader = THREE.ShaderLib['cube'];
                 cubeShader.uniforms['tCube'].value = cubeMap
@@ -134,18 +136,20 @@
                 // central object
 
                 var geometry = new THREE.TorusKnotGeometry(1.14, 0.55, 35, 10);
+                orgGeometry = new THREE.TorusKnotGeometry(1.14, 0.55, 35, 10);
                 var material = new THREE.MeshStandardMaterial({
                     //color: 0,
                     //map: texture,
-                    roughness: 0,
+                    roughness: .2,
                     metalness: 1,
                     lightMap: texture,
                     side: THREE.DoubleSide,
                     envMap: cubeMap,
-                    shading: THREE.SmoothShading
+                    shading: THREE.FlatShading
                 });
-                var object = new THREE.Mesh(geometry, material);
-                //scene.add(object);
+                object = new THREE.Mesh(geometry, material);
+                object.position.y = 6
+                scene.add(object);
 
 
 
@@ -191,21 +195,26 @@
 
                 var light = new THREE.DirectionalLight(0xffffff);
                 light.position.set(-1, 1.5, 0.5);
-                scene.add(light);
+                //scene.add(light);
+                
+                pointLight = new THREE.PointLight()
+                target.add(pointLight)
+                
+                scene.add(target)
 
-                var ambient = new THREE.AmbientLight(0xaaaaaa)
-                scene.add(ambient)
+                //var ambient = new THREE.AmbientLight(0xaaaaaa)
+                //scene.add(ambient)
 
                 jumpCam()
             }
 
             function jumpCam() {
                 /*TweenMax.to(camera.position, 1, {
-                    x: (Math.random() - .5) * 10,
-                    y: (Math.random()) * 5,
-                    z: (Math.random() - .5) * 10,
-                    onComplete: jumpCam
-                });*/
+                 x: (Math.random() - .5) * 10,
+                 y: (Math.random()) * 5,
+                 z: (Math.random() - .5) * 10,
+                 onComplete: jumpCam
+                 });*/
 
                 TweenMax.to(target.position, 1, {
                     x: (Math.random() - .5) * 10,
@@ -237,10 +246,29 @@
                     }
                 }
 
-                //controls.update();
+                var v = object.geometry.vertices
+                var oldV = orgGeometry.vertices
+                for (var i = 0; i < v.length; i++) {
+                    if (Math.random() < .01) {
+                        TweenMax.to(v[i],0,{
+                            x:oldV[i].x* (Math.random() / 1 + 1),
+                            y:oldV[i].y* (Math.random() / 1 + 1),
+                            z:oldV[i].z* (Math.random() / 1 + 1)
+                        })
+                    }else{
+                        TweenMax.to(v[i],1,{
+                            x:oldV[i].x,
+                            y:oldV[i].y,
+                            z:oldV[i].z
+                        })
+                    }
+                }
+                object.geometry.verticesNeedUpdate = true
+
+                controls.update();
 
 
-                camera.lookAt(scene.position)
+                //camera.lookAt(scene.position)
 
                 if (mobile) {
                     camera.position.set(0, 0, 0)
