@@ -54,13 +54,13 @@
                 // camera
 
                 camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
-                camera.position.set(0, 0, 3);
+                camera.position.set(-10,  0, 0);
                 camera.focalLength = camera.position.distanceTo(scene.position);
 
                 // controls
 
                 controls = new THREE.OrbitControls(camera);
-                controls.autoRotate = true;
+                controls.autoRotate = false;
 
                 if (WEBVR.isAvailable() === true) {
                     controls = new THREE.VRControls(camera);
@@ -81,23 +81,97 @@
                 
                 // central object
 
-                var geometry = new THREE.TorusKnotGeometry(0.64, 0.25, 25, 6);
-                var material = new THREE.MeshPhongMaterial({shading: THREE.FlatShading});
+                var geometry = new THREE.TorusKnotGeometry(100, 10, 65, 11);
+                // var geometry = new THREE.BoxBufferGeometry(1, 1, 1, 1);
+                // var material = new THREE.MeshPhongMaterial({shading: THREE.FlatShading});
+                var material = new THREE.MeshPhongMaterial({shading: THREE.SmoothShading, 
+                                    wireframe: true, 
+                                    color: 0xabcabc,
+                                    // specular: 0xcdfeda,
+                                    });
+                
                 var object = new THREE.Mesh(geometry, material);
                 scene.add(object);
 
+
+
+                var geometryPlane = new THREE.PlaneGeometry( 10, 10 );
+                var materialPlane = new THREE.MeshBasicMaterial( {color: 0x526F35, side: THREE.DoubleSide} );
+                var plane = new THREE.Mesh( geometryPlane, materialPlane );
+                plane.position.x = 0;
+                plane.position.y = -4;
+                plane.position.z = 0;
+                plane.rotation.x = Math.PI * .5;
+                scene.add( plane );
+
+                // wall 1
+                var wall1Geom = new THREE.PlaneGeometry( 10, 2 );
+                var wall1Material = new THREE.MeshBasicMaterial( {color: 0x777733, side: THREE.DoubleSide} );
+                var wall1Plane = new THREE.Mesh( wall1Geom, wall1Material );
+                wall1Plane.position.x = 0;
+                wall1Plane.position.y = -3;
+                wall1Plane.position.z = 5;
+                wall1Plane.rotation.x = Math.PI;
+                scene.add( wall1Plane );
+
+                // wall 2
+                var wall2Geom = new THREE.PlaneGeometry( 10, 2 );
+                var wall2Material = new THREE.MeshBasicMaterial( {color: 0x00ffaa, side: THREE.DoubleSide} );
+                var wall2Plane = new THREE.Mesh( wall2Geom, wall2Material );
+                wall2Plane.position.x = 0;
+                wall2Plane.position.y = -3;
+                wall2Plane.position.z = -5;
+                wall2Plane.rotation.x = Math.PI;
+                scene.add( wall2Plane );
+
+                // wall 3
+                var wall3Geom = new THREE.PlaneGeometry( 10, 2 );
+                var wall3Material = new THREE.MeshBasicMaterial( {color: 0xabcbda, side: THREE.DoubleSide} );
+                var wall3Plane = new THREE.Mesh( wall3Geom, wall3Material );
+                wall3Plane.position.x = -5;
+                wall3Plane.position.y = -3;
+                wall3Plane.position.z = 0;
+                wall3Plane.rotation.y = Math.PI * .5;
+                wall3Plane.rotation.z = Math.PI;
+                scene.add( wall3Plane );
+
+                // wall 4
+                var wall4Geom = new THREE.PlaneGeometry( 10, 2 );
+                var wall4Material = new THREE.MeshBasicMaterial( {color: 0x0fbefa, side: THREE.DoubleSide} );
+                var wall4Plane = new THREE.Mesh( wall4Geom, wall4Material );
+                wall4Plane.position.x = 5;
+                wall4Plane.position.y = -3;
+                wall4Plane.position.z = 0;
+                wall4Plane.rotation.x = Math.PI;
+                wall4Plane.rotation.y = Math.PI * .5;
+                scene.add( wall4Plane );
+
                 // cubes
 
-                var group = new THREE.Object3D();
+                // var group = new THREE.Object3D();
+                // for (var _x = -3; _x <= 3; _x++) {
+                //     for (var _y = -3; _y <= 3; _y++) {
+                //         for (var _z = -3; _z <= 3; _z++) {
+                //             // var geo = new THREE.BoxGeometry(.1, .1, .1, 1, 1, 1)
+                //             var geo = new THREE.BoxGeometry(.3, .3, .3, 1, 1, 1)
+                //             var mesh = new THREE.Mesh(geo, material)
+                //             mesh.position.set(_x, _y, _z)
+                //             group.add(mesh);
+                //         }
+                //     }
+                // }
+                var materialCubes = new THREE.MeshPhongMaterial({shading: THREE.SmoothShading, 
+                                    wireframe: false, 
+                                    color: 0xabcabc,
+                                    });
+                window.group = new THREE.Object3D();
                 for (var _x = -3; _x <= 3; _x++) {
-                    for (var _y = -3; _y <= 3; _y++) {
                         for (var _z = -3; _z <= 3; _z++) {
-                            var geo = new THREE.BoxGeometry(.1, .1, .1, 1, 1, 1)
-                            var mesh = new THREE.Mesh(geo, material)
-                            mesh.position.set(_x, _y, _z)
+                            var geo = new THREE.BoxGeometry(.2, .2, .2, 1, 1, 1)
+                            var mesh = new THREE.Mesh(geo, materialCubes)
+                            mesh.position.set(_x, -2.5, _z)
                             group.add(mesh);
                         }
-                    }
                 }
 
                 // merge
@@ -107,12 +181,13 @@
                     group.children[i].updateMatrix();
                     geom.merge(group.children[i].geometry, group.children[i].matrix);
                 }
-                group = new THREE.Mesh(geom, material);
+                group = new THREE.Mesh(geom, materialCubes);
                 scene.add(group)
 
                 // light
 
                 var light = new THREE.DirectionalLight(0xffffff);
+                light.shadowCameraVisible = true; // only for debugging
                 light.position.set(-1, 1.5, 0.5);
                 scene.add(light);
             }
@@ -120,15 +195,33 @@
             function render() {
                 requestAnimationFrame(render);
 
+                
                 controls.update();
+
+                
 
                 if (mobile) {
                     camera.position.set(0, 0, 0)
                     camera.translateZ(5);
                 }
+
+                group.rotation.x += 0.1;
+                group.rotation.y += 0.1;
+                group.rotation.z += 0.1;
+
+                group.position.x += 0.1;
+                group.position.x = group.position.x % 2
+
+                group.position.y += 0.1;
+                group.position.y = group.position.y % 2
+
+                group.position.z += 0.1;
+                group.position.z = group.position.z % 2
+
                 renderer.render(scene, camera);
 
             }
+
 
         </script>
     </body>
