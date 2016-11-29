@@ -1,14 +1,14 @@
 # [Building Virtual Reality Worlds using Three.js](http://grayarea.org/workshop/building-virtual-reality-worlds-using-three-js/)
 
-[![alt text](http://worlds2.marpi.pl/assets/image1.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/)
+[![alt text](http://classes.marpi.pl/worlds2/assets/image1.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/)
 
-[![alt text](http://worlds2.marpi.pl/assets/stadium.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/public/stadium)
+[![alt text](http://classes.marpi.pl/worlds2/assets/stadium.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/stadium)
 
-[![alt text](http://worlds2.marpi.pl/assets/wave.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/public/wave)
+[![alt text](http://classes.marpi.pl/worlds2/assets/wave.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/wave)
 
-[![alt text](http://worlds2.marpi.pl/assets/glass_eagle.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/public/glass_eagle)
+[![alt text](http://classes.marpi.pl/worlds2/assets/glass_eagle.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/glass_eagle)
 
-[![alt text](http://worlds2.marpi.pl/assets/class.jpg "Building Virtual Reality Worlds using Three.js")](https://worlds2.marpi.pl/public/class)
+[![alt text](http://classes.marpi.pl/worlds2/assets/class.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/class)
 
 ### How to run
 
@@ -31,4 +31,4 @@ python -m http.server
 
 And once you commit your changes, and want to see them in Google Cardboard:
 
-[https://worlds2.marpi.pl/](https://worlds2.marpi.pl/)
+[http://classes.marpi.pl/worlds2/](http://classes.marpi.pl/worlds2/)
