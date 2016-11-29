@@ -1,14 +1,14 @@
 # [Building Virtual Reality Worlds using Three.js](http://grayarea.org/workshop/building-virtual-reality-worlds-using-three-js/)
 
-[![alt text](http://classes.marpi.pl/worlds2/assets/image1.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/)
+[![alt text](assets/image1.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/)
 
-[![alt text](http://classes.marpi.pl/worlds2/assets/stadium.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/stadium)
+[![alt text](assets/stadium.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/stadium)
 
-[![alt text](http://classes.marpi.pl/worlds2/assets/wave.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/wave)
+[![alt text](assets/wave.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/wave)
 
-[![alt text](http://classes.marpi.pl/worlds2/assets/glass_eagle.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/glass_eagle)
+[![alt text](assets/glass_eagle.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/glass_eagle)
 
-[![alt text](http://classes.marpi.pl/worlds2/assets/class.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/class)
+[![alt text](assets/class.jpg "Building Virtual Reality Worlds using Three.js")](http://classes.marpi.pl/worlds2/public/class)
 
 ### How to run
 
